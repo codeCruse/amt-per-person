@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cost Evenly</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body{
+			width: 100%;
+			height: 100vh;
+			background: black;
+			color: #000;
+		}
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+		    -webkit-appearance: none;
+		    margin: 0;
+		}
+
+		label{
+			font-size: 1.3rem;
+		}
+
+		input{
+			font-weight: bold;
+			box-shadow: 0 0 8px black;
+		}
+
+		.container{
+			width: 20rem;
+			border-radius: 20px;
+			background-color: silver;
+			padding: 15px;
+			margin: 60px auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		.section{	
+			height: 5rem;
+			padding-inline: 10px;
+			font-family: verdana, tahoma;
+			display: flex;
+			align-items: center;
+			border: 2px solid gray;
+			border-radius: 20px;
+			margin-bottom: 20px;
+			box-sizing: content-box;
+			box-shadow: 2px 2px 8px black;
+		}
+
+		fieldset{
+			margin: 10px 0 0 30px;
+			border: none;
+		}
+
+		.total, .Amt-per-person{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			padding: 10px;
+		}
+
+		.userTotal, .perPerson{
+			width: 150px;
+			font-size: 1.2em;
+			border: none;
+			border-radius: 8px;
+			text-align: center;
+			padding-block: 10px;
+		}
+
+		.people-total {
+			display: flex;
+			justify-content: space-evenly;
+		}
+
+		.people-total input{
+			width: 50px;
+			height: 30px;
+			margin-inline: 10px;
+			text-align: center;
+			border: 1px solid gray;
+			border-radius: 8px;
+			padding: 5px;
+		}
+
+		.buttonSet{
+			display: flex;
+			align-items: center;
+		}
+
+		button{
+			display: inline-block;
+			width: 25px;
+			aspect-ratio: 1/1;
+			border-radius: 50%;
+			font-size: 20px;
+			font-weight: bold;
+		}
+
+		.Amt-per-person label{
+			display: inline-block;
+		}
+
+		.btn-sec{
+			display: flex;
+			jsutify-content: space-evenly;
+			align-items: center;
+		}
+
+		.btn{
+			box-sizing: content-box;
+			width: 100px;
+			height: 40px;
+			margin: 0 auto;
+			border-radius: 5px;
+			padding: 5px 10px;
+			cursor: pointer;
+		}
+
+		.btn:hover{
+			background-color: gray;
+			color: white;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+
+		<div class="total section">
+			<label for="total-Amt">Total Amt: </label>
+			<input id="total-Amt" class="userTotal" type="number" placeholder="0"/>
+		</div>
+
+		<div class="people-total section">
+			<label for="total-ppl">Total People: </label>
+			<div class="buttonSet">
+				<button id="negetive">-</button>
+				<input id="total-ppl" class="totalUsers" type="number" value="1" />
+				<button id="positive">+</button>
+			</div>
+		</div>
+
+		<div class="Amt-per-person section">
+			<label for="per-person">Amount Per Person: </label>
+			<input id="per-person" class="perPerson" type="text" placeholder="0" />
+		</div>
+		<div class="btn-sec">
+			<button id="tbr" class="btn">Reset</button>
+			<button id="tb" class="btn">Enter</button>		
+		</div>
+	</div>
+
+	<script>
+		const total_Amt = document.getElementById('total-Amt');
+		const total_ppl = document.getElementById('total-ppl');
+		const per_person = document.getElementById('per-person');
+		const decrease = document.getElementById('negetive');
+		const increase = document.getElementById('positive');
+		const btn = document.getElementById('tb');
+		const Rbtn = document.getElementById('tbr');
+
+		const test = () => {
+			let final = total_Amt.value/total_ppl.value;
+			per_person.value = Math.round(final);
+		}
+
+		const reset = () => {
+			total_Amt.value = "";
+			total_ppl.value = 1;
+			per_person.value = "";
+		}
+
+		let count = 1;
+
+		decrease.addEventListener('click', () => {
+			if(count > 1){
+				count--
+				total_ppl.value = count;
+			}
+		});
+
+		increase.addEventListener('click', () => {
+			count++
+			total_ppl.value = count;
+		});
+
+		btn.addEventListener('click', test);
+		Rbtn.addEventListener('click', reset);
+
+	</script>
+
+</body>
+</html>
